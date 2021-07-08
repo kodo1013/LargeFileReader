@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import bigid.test.app.agregator.FileResultsHandler;
 import bigid.test.app.agregator.ResultsHandler;
 import bigid.test.app.agregator.WordLocation;
 import bigid.test.app.parser.LargeFileParser;
@@ -20,7 +21,7 @@ public class SampleRunApplication {
 		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		LargeFileParser parser = context.getBean(LargeFileParser.class);
 		Map<String, List<WordLocation>> results = parser.parse(LARGE_FILE_URL, NAMES_TO_SEARCH, chunkSize);
-		ResultsHandler resultsHandler = context.getBean(ResultsHandler.class);
-		resultsHandler.saveToFile(results);
+		ResultsHandler resultsHandler = context.getBean(FileResultsHandler.class);
+		resultsHandler.displayResults(results);
 	}
 }
